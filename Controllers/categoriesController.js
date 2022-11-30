@@ -1,4 +1,5 @@
 const Category = require("../models/Category")
+const mongoose = require('mongoose');
 
 class Controller {
 
@@ -30,7 +31,7 @@ class Controller {
       [
         {
           $match: {
-              _id: mongoose.Types.ObjectId(id)
+            _id: mongoose.Types.ObjectId(id)
           },
         },
         {
@@ -42,17 +43,20 @@ class Controller {
           },
         },
       ], (err, response) => {
-      if (err) return res.status(500).json({
-        message: `ERROR ${err}`,
-        success: false,
+        if (err) return res.status(500).json({
+          message: `ERROR ${err}`,
+          success: false,
+        });
+        res.status(200).json({ success: true, message: "Get Category Successfully", data: response });
       });
-      res.status(200).json({ success: true, message: "Get Category Successfully", data: response });
-    });
   }
 
   //Add a Category
   post(req, res, next) {
-    let body = req.body;
+    let { filename } = req.file;
+    let { title } = req.body;
+    let body = { title: title, icon: filename };
+
     let doc = new Category(body);
     doc.save((err, response) => {
       if (err) return res.status(500).json({

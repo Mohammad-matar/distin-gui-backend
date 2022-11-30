@@ -24,7 +24,10 @@ class Controller {
 
   //Add a Item
   post(req, res, next) {
-    let body = req.body;
+    let { filename } = req.file;
+    let { title, price, description, category_id } = req.body;
+    let body = { title: title, price: price, description: description, category_id: category_id, img: filename };
+
     let doc = new Item(body);
     doc.save((err, response) => {
       if (err) return res.status(500).json({
