@@ -24,7 +24,7 @@ class Controller {
 
   //Add a Item
   post(req, res, next) {
-    let { filename } = req.file;
+    let { filename } = req.file || {};
     let { title, price, description, category_id } = req.body;
     let body = { title: title, price: price, description: description, category_id: category_id, img: filename };
 
