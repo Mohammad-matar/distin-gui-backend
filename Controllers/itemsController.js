@@ -42,7 +42,7 @@ class Controller {
   put(req, res, next) {
     let { id } = req.params;
     let { filename } = req.file || {};
-    let { title, price, description, category_id } = req.body;rs
+    let { title, price, description, category_id } = req.body;
     let body = { title: title, price: price, description: description, category_id: category_id, img: filename };
     Item.updateOne(
       { _id: id },
