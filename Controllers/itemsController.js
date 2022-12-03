@@ -41,7 +41,9 @@ class Controller {
   //Update a Item
   put(req, res, next) {
     let { id } = req.params;
-    let body = req.body;
+    let { filename } = req.file || {};
+    let { title, price, description, category_id } = req.body;rs
+    let body = { title: title, price: price, description: description, category_id: category_id, img: filename };
     Item.updateOne(
       { _id: id },
       {

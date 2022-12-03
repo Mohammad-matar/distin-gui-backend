@@ -53,7 +53,7 @@ class Controller {
 
   //Add a Category
   post(req, res, next) {
-    let { filename } = req.file;
+    let { filename } = req.file || {};
     let { title } = req.body;
     let body = { title: title, icon: filename };
 
@@ -70,7 +70,9 @@ class Controller {
   //Update a Category
   put(req, res, next) {
     let { id } = req.params;
-    let body = req.body;
+    let { filename } = req.file || {};
+    let { title } = req.body;
+    let body = { title: title, icon: filename };
     Category.updateOne(
       { _id: id },
       {
