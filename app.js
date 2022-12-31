@@ -8,6 +8,8 @@ var createError = require("http-errors");
 
 var categoriesRouter = require("./routes/categories");
 var itemsRouter = require("./routes/items");
+var adminsRouter = require("./routes/admins");
+var authRouter = require("./routes/auth");
 
 var app = express();
 const mongoose = require("mongoose");
@@ -21,6 +23,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/categories", categoriesRouter);
 app.use("/items", itemsRouter);
+app.use("/admins", adminsRouter);
+app.use("/auth", authRouter);
 
 mongoose
     .connect(process.env.URL, {
